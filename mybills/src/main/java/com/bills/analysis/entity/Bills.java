@@ -1,8 +1,6 @@
 package com.bills.analysis.entity;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Size;
 
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -22,6 +20,9 @@ public class Bills {
     private Date paymentDate;
     @Column(name = "paymentMonth", nullable = false)
     private Months months;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = Description.class)
+    @JoinColumn(name = "description_id", nullable = false, foreignKey = @ForeignKey(name = "fk_description", value = ConstraintMode.CONSTRAINT))
+    private Description description;
 
     public Bills() {
     }
