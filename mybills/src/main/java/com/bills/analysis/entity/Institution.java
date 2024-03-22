@@ -1,6 +1,6 @@
 package com.bills.analysis.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Institution")
