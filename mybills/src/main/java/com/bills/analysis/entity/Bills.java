@@ -5,7 +5,13 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Bills")
+@Table(name = "Bills", indexes = {
+    @Index(name = "ıdx_bills_amount_billyear", columnList = "amount, billYear, paymentDate, paymentMonth"),
+    @Index(name = "ıdx_bills_amount", columnList = "amount"),
+    @Index(name = "ıdx_bills_billyear", columnList = "billYear"),
+    @Index(name = "ıdx_bills_paymentdate", columnList = "paymentDate"),
+    @Index(name = "ıdx_bills_paymentmonth", columnList = "paymentMonth")
+})
 public class Bills {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
