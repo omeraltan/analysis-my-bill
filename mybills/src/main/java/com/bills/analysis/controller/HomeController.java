@@ -4,12 +4,10 @@ import com.bills.analysis.entity.Bills;
 import com.bills.analysis.service.BillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -19,19 +17,38 @@ import java.util.List;
  * Api docs                  : http://localhost:8181/v2/api-docs
  */
 
-@RestController
-@RequestMapping("/bills")
+@Controller
 @Api(value = "Home Api documentation")
 public class HomeController {
 
-    @Autowired
     BillService service;
 
-    @GetMapping("/bill")
+    public HomeController(BillService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/index")
     @ApiOperation(value = "Bills Menu Method")
     public String getIndex(Model model){
-        model.addAttribute("name",getName());
         return "index";
+    }
+
+    @GetMapping("/tanim")
+    @ApiOperation(value = "Tanım Menu Method")
+    public String getTanim(Model model){
+        return "tanim";
+    }
+
+    @GetMapping("/fatura")
+    @ApiOperation(value = "Fatura Menu Method")
+    public String getFatura(Model model){
+        return "fatura";
+    }
+
+    @GetMapping("/kurum")
+    @ApiOperation(value = "Kurum Menu Method")
+    public String getKurum(Model model){
+        return "kurum";
     }
 
     @GetMapping("/less")
@@ -39,10 +56,6 @@ public class HomeController {
     public ResponseEntity<List<Bills>> getAll(){
         List<Bills> billsList = service.findAll();
         return ResponseEntity.ok(billsList);
-    }
-
-    public String getName(){
-        return "Ömer ALTAN";
     }
 
 }
