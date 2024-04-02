@@ -32,24 +32,4 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/tanim")
-    @ApiOperation(value = "Tanım Menu Method")
-    public String getTanim(Model model){
-        return "tanim";
-    }
-
-    @GetMapping("/fatura")
-    @ApiOperation(value = "Fatura Menu Method")
-    public String getFatura(Model model){
-        return "fatura";
-    }
-
-    @GetMapping("/kurum")
-    @ApiOperation(value = "Kurum Menu Method")
-    public String getKurum(Model model){
-        Institution institution = new Institution();
-        model.addAttribute("institution",institution);
-        return "kurum";
-    }
-
 }
