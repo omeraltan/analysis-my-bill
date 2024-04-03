@@ -2,19 +2,24 @@ package com.bills.analysis.controller;
 
 import com.bills.analysis.entity.Institution;
 import com.bills.analysis.service.InstitutionService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Swagger documentation link: http://localhost:8181/swagger-ui.html#/
+ * Swagger editor link       : https://editor.swagger.io/
+ * Api docs                  : http://localhost:8181/v2/api-docs
+ */
+
 @Controller
 @RequestMapping("/kurum")
+@Api(value = "Kurum Api documentation")
 public class InstitutionController {
 
     InstitutionService service;
@@ -25,7 +30,6 @@ public class InstitutionController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Kurum Ana Sayfa Verileri")
     public String getKurum(Model model){
         Institution institution = new Institution();
         model.addAttribute("institution",institution);
@@ -35,9 +39,25 @@ public class InstitutionController {
     }
 
     @PostMapping("/processInstitutionForm")
-    @ApiOperation(value = "Kurum Menu Method")
+    @ApiOperation(value = "Kurum Kaydetme İşlemi.")
     public String processForm(@ModelAttribute("institution") Institution institution){
         service.saveInstitution(institution);
+        return "redirect:/kurum";
+    }
+
+    @GetMapping("/update/{id}")
+    @ApiOperation(value = "Kurum Güncelleme İşlemi")
+    public String updateKurum(Model model, @PathVariable("id") Long id){
+        Institution institution = service.getById(id);
+        model.addAttribute("kurum", institution);
+        return "kurumedit";
+    }
+
+    @GetMapping("/delete/{id}")
+    @ApiOperation(value = "Kurum Silme İşlemi.")
+    public String deleteKurum(@PathVariable("id") Long id){
+        Institution institution = service.getById(id);
+        service.delete(institution);
         return "redirect:/kurum";
     }
 

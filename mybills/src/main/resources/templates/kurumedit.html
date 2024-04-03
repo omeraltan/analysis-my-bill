@@ -38,7 +38,7 @@
   </nav>
   <br/>
   <div style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px">
-    <form th:action="@{/kurum/processInstitutionForm}" th:object="${institution}" method="POST">
+    <form th:action="@{/kurum/processInstitutionForm}" th:object="${kurum}" method="POST">
       <div class="mb-3">
         <label for="kurumId" class="form-label">Kurum Adı*</label>
         <input id="kurumId" th:field="*{name}" type="text" class="form-control" required placeholder="Lütfen Kurum Adı Giriniz!">
@@ -56,35 +56,13 @@
           <i class='fa fa-save'></i>
           Kaydet
         </button>
+        <button type="submit" class="btn btn-primary" style="width: 200px">
+          <i class='fa fa-arrow-left'></i>
+          Geri
+        </button>
       </div>
       <br/>
-      <div class="mb-3">
-        <table class="table table-bordered border-primary">
-          <tr>
-            <th>Sıra Nu</th>
-            <th>Kurum Adı</th>
-            <th>Telefonu</th>
-            <th>Adresi</th>
-            <th style="text-align: center">İşlem</th>
-          </tr>
-          <tr th:each="kurum : ${list}">
-            <td class="align-middle" th:text="${kurum.id}"></td>
-            <td class="align-middle" th:text="${kurum.name}"></td>
-            <td class="align-middle" th:text="${kurum.phone}"></td>
-            <td class="align-middle" th:text="${kurum.address}"></td>
-            <td class="align-middle" style="text-align: center; width: 180px">
-              <a class="btn btn-outline-info btn-sm" th:href="@{/kurum/update/{id}(id=${kurum.id})}">
-                Güncelle
-                <i class="fa fa-pencil-square-o"></i>
-              </a>
-              <a class="btn btn-outline-danger btn-sm" th:href="@{/kurum/delete/{id}(id=${kurum.id})}">
-                Sil
-                <i class="fa fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <input type="hidden" id="id" th:field="*{id}">
     </form>
   </div>
 </div>

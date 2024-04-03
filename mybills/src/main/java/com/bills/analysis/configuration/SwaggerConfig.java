@@ -26,8 +26,8 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.bills.analysis.controller")) // only this path
-            //.paths(PathSelectors.regex("/.*"))
-            .paths(PathSelectors.ant("/kurum/*")) // only controllers from a particular package
+            .paths(PathSelectors.regex("/.*"))
+            //.paths(PathSelectors.ant("/kurum/*")) // only controllers from a particular package
             .build()
             .useDefaultResponseMessages(false)
             .apiInfo(apiEndPointsInfo());
