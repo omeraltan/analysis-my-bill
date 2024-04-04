@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-  <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px">
+  <nav class="navbar navbar-expand-lg border border-secondary rounded" style="background-color: lightskyblue; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px">
     <div class="container-fluid">
       <a class="navbar-brand" th:href="@{/}" style="font-weight: bold"><i>Fatura/Analiz</i></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,33 +39,33 @@
   <br/>
   <div style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px">
     <form th:action="@{/kurum/processInstitutionForm}" th:object="${institution}" method="POST">
-      <div class="mb-3">
-        <label for="kurumId" class="form-label">Kurum Adı*</label>
-        <input id="kurumId" th:field="*{name}" type="text" class="form-control" required placeholder="Lütfen Kurum Adı Giriniz!">
+      <div class="border border-success border rounded mb-3" style="width: 500px">
+        <label class="col-sm-2 col-form-label" style="text-align: center; width: 500px; font-weight: bold">: Kurum Bilgileri :</label>
       </div>
-      <div class="mb-3">
-        <label for="phoneId" class="form-label">Telefon Numarası*</label>
-        <input id="phoneId" th:field="*{phone}" type="number" class="form-control" required placeholder="Lütfen Telefon Numarası Giriniz!">
+      <div class="mb-2">
+        <input id="kurumId" th:field="*{name}" type="text" class="form-control form-control-sm" required placeholder="Kurum Adı Giriniz!*" style="width: 500px">
       </div>
-      <div class="mb-3">
-        <label for="kurumaddress" class="form-label">Kurum Açıklaması*</label>
-        <textarea id="kurumaddress" th:field="*{address}" class="form-control" required rows="3" placeholder="Lütfen Kurum Açıklamasını Giriniz!" th:maxlength="100"></textarea>
+      <div class="mb-2">
+        <input id="phoneId" th:field="*{phone}" type="number" class="form-control form-control-sm" required placeholder="Telefon Numarası Giriniz!*" style="width: 500px">
+      </div>
+      <div class="mb-2">
+        <textarea id="kurumaddress" th:field="*{address}" class="form-control form-control-sm" required rows="3" placeholder="Lütfen Kurum Açıklamasını Giriniz!*" th:maxlength="100" style="width: 500px"></textarea>
       </div>
       <div>
-        <button type="submit" class="btn btn-primary" style="width: 200px">
+        <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalOne" style="width: 500px">
           <i class='fa fa-save'></i>
           Kaydet
         </button>
       </div>
       <br/>
       <div class="mb-3">
-        <table class="table table-bordered border-primary">
+        <table class="table table-bordered">
           <tr>
-            <th>Sıra Nu</th>
-            <th>Kurum Adı</th>
-            <th>Telefonu</th>
-            <th>Adresi</th>
-            <th style="text-align: center">İşlem</th>
+            <th class="border border-success border rounded" style="background-color: lightskyblue; font-weight: normal; font-size: 15px">Sıra Nu</th>
+            <th class="border border-success border rounded" style="background-color: lightskyblue; font-weight: normal; font-size: 15px">Kurum Adı</th>
+            <th class="border border-success border rounded" style="background-color: lightskyblue; font-weight: normal; font-size: 15px">Telefonu</th>
+            <th class="border border-success border rounded" style="background-color: lightskyblue; font-weight: normal; font-size: 15px">Adresi</th>
+            <th class="border border-success border rounded" style="background-color: lightskyblue; font-weight: normal; font-size: 15px; text-align: center">İşlem</th>
           </tr>
           <tr th:each="kurum : ${list}">
             <td class="align-middle" th:text="${kurum.id}"></td>
@@ -84,6 +84,24 @@
             </td>
           </tr>
         </table>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="modalOne" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </div>
